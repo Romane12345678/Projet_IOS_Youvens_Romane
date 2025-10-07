@@ -1,3 +1,24 @@
+//Gestion Etudiant
+func ajouterEtudiant(){
+
+}
+func listerEtudiant(){
+
+}
+CalculerMoyenne(){
+
+}
+//Gestion Economat
+func ajouterTransaction(){
+
+}
+func listerTransaction(){
+
+}
+func calculerSolde(){
+
+}
+//Gestion Menu
 func afficherMenuPrincipal() {
     print("\n" + "==================================================")
     print("SYSTÈME DE GESTION SCOLAIRE")
@@ -13,12 +34,11 @@ func afficherMenuEtudiants() {
         print("\nGESTION DES ÉTUDIANTS")
         print("1.Ajouter un étudiant")
         print("2.Lister les étudiants")
-        print("3.Ajouter une note")
-        print("4.Voir les moyennes")
-        print("5.Retour au menu principal")
-        print("Choisissez entre 1 a 5")
+        print("3.Calculer la moyenne des notes par matiere")
+        print("4.Retour au menu principal")
+        print("Choisissez entre 1 a 4")
         
-        let choix = "5"
+        let choix = "4"
         print(choix)
         
         switch choix {
@@ -27,16 +47,14 @@ func afficherMenuEtudiants() {
         case "2":
             listerEtudiants()
         case "3":
-            ajouterNote()
+            CalculerMoyenne()
         case "4":
-            calculerMoyennes()
-        case "5":
             break
         default:
             print("Option invalide")
         }
         
-        if choix == "5" {
+        if choix == "4" {
             break
         }
     }
