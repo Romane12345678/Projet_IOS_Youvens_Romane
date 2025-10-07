@@ -5,7 +5,7 @@ func ajouterEtudiant(){
 func listerEtudiant(){
 
 }
-CalculerMoyenne(){
+func CalculerMoyenne(){
 
 }
 //Gestion Economat
