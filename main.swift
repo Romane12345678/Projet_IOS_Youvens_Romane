@@ -494,9 +494,76 @@ func main() {
     }
 }
 
-func ajouterTransaction() { 
-print(" Fonction: ajouterTransaction() appelee") 
+
+// =========================================================
+
+// FONCTION : Ajouter une transaction
+func ajouterTransaction() {
+    print("\n--- AJOUTER UNE TRANSACTION ---")
+
+    if etudiants.isEmpty {
+        print("Aucun etudiant enregistre. Veuillez d'abord ajouter un etudiant.")
+        return
+    }
+
+    // Afficher la liste des étudiants pour voir les IDs
+    listerEtudiants()
+
+    // Sélectionner l'étudiant
+    print("Entrez l'ID de l'etudiant : ")
+    guard let idEtd = readLine(), !idEtd.isEmpty else {
+        print("ID invalide.")
+        return
+    }
+
+    // Vérifier si l'étudiant existe
+    guard let etudiant = trouverEtudiantParId(idEtd) else {
+        print("Aucun etudiant trouve avec cet ID.")
+        return
+    }
+
+    // Calculer le total déjà versé par cet étudiant
+    var totalVerse = 0.0
+    for transaction in transactions {
+        if transaction.idEtd == idEtd {
+            totalVerse += transaction.montantVerse
+        }
+    }
+
+    // Vérifier s’il a déjà tout payé
+    if totalVerse >= montantFixe {
+        print("Cet etudiant a deja completement paye (\(montantFixe) G)")
+        return
+    }
+
+    // Entrer le montant versé
+    print("Entrez le versement : ")
+    guard let montantStr = readLine(), let montant = Double(montantStr) else {
+        print("Montant invalide.")
+        return
+    }
+
+    if montant <= 0 {
+        print("Le montant doit etre > 0.")
+        return
+    }
+
+    // Vérifier que le nouveau versement ne dépasse pas le solde restant
+    if totalVerse + montant > montantFixe {
+        let reste = montantFixe - totalVerse
+        print("Ce versement depasse le montant restant (\(reste) G).")
+        return
+    }
+
+    // Ajouter la transaction
+    let idTransaction = idTransactionCounter
+    transactions.append((idTransaction: idTransaction, idEtd: idEtd, montantVerse: montant))
+    idTransactionCounter += 1
+
+    print("Transaction enregistree pour \(etudiant.nom) \(etudiant.prenom) !\n")
 }
+
+
 func listerTransactions() { 
 print(" Fonction: listerTransactions() appelee") 
 }
