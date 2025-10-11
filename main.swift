@@ -564,9 +564,39 @@ func ajouterTransaction() {
 }
 
 
-func listerTransactions() { 
-print(" Fonction: listerTransactions() appelee") 
+// Fonction pour lister les transactions
+func listerTransactions() {
+    print("\n--- LISTE DES TRANSACTIONS ---")
+
+    // Vérifier s'il y a des transactions enregistrées
+    if transactions.isEmpty {
+        print("Aucune transaction enregistree.")
+        return
+    }
+
+    // En-tête du tableau pour un affichage propre
+    print("+---------------+---------------+---------------+----------------+")
+    print("| ID Transaction| Nom           | Prenom        | Montant Verse  |")
+    print("+---------------+---------------+---------------+----------------+")
+
+    // Parcourir toutes les transactions
+    for transaction in transactions {
+        // Retrouver les informations de l'étudiant correspondant
+        if let etudiant = trouverEtudiantParId(transaction.idEtd) {
+            // Afficher une ligne formatée
+            print("| \(String(format: "%-13d", transaction.idTransaction)) | \(String(format: "%-13s", (etudiant.nom as NSString).utf8String!)) | \(String(format: "%-13s", (etudiant.prenom as NSString).utf8String!)) | \(String(format: "%-14.2f", transaction.montantVerse)) |")
+        } else {
+            // Si l'étudiant n'existe plus dans la liste
+            print("| \(transaction.idTransaction) | Etudiant inconnu | --- | \(transaction.montantVerse) |")
+        }
+    }
+
+    // Pied du tableau
+    print("+---------------+---------------+---------------+----------------+")
 }
+
+
+
 func calculerSolde() {
 print(" Fonction: calculerSolde() appelee") 
 }
